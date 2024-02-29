@@ -4,14 +4,14 @@
     "pk": "4560793f14174436a490afec7753fd1b",
     "fields": {
       "password": "pbkdf2_sha256$720000$yCQZiMJuhB0Fb3bgFOHxax$6a+0hHM71PJ6JUzFDSXWLD27uvJrRZ/r3r8J4HUO3hU=",
-      "last_login": "2024-02-18 14:27:12.531246",
+      "last_login": "2024-02-18 14:27:12.531246+00:00",
       "is_superuser": 1,
       "first_name": "",
       "last_name": "",
       "email": "asd@gmail.com",
       "is_staff": 1,
       "is_active": 1,
-      "date_joined": "2024-02-01 14:34:16.297713",
+      "date_joined": "2024-02-01 14:34:16.297713+00:00",
       "phone_number": "+77761234567",
       "username": null
     }

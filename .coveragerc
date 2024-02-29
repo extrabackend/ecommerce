@@ -1,0 +1,5 @@
+[report]
+omit =
+    */migrations*
+    */tests*
+fail_under = 90
