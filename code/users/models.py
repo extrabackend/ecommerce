@@ -34,5 +34,33 @@ class User(AbstractUser):
     username = models.CharField(max_length=150, unique=True, null=True)
 
     USERNAME_FIELD = 'phone_number'
-
     objects = CustomUserManager()
+
+
+class Country(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    name_kz = models.CharField(max_length=255, unique=True, blank=True, null=True)
+    name_ru = models.CharField(max_length=255, unique=True, blank=True, null=True)
+    name_en = models.CharField(max_length=255, unique=True, blank=True, null=True)
+    iso_code = models.CharField(max_length=2, db_index=True, blank=True, null=True)
+
+
+class City(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='cities')
+    name_kz = models.CharField(max_length=255, unique=True, blank=True, null=True)
+    name_ru = models.CharField(max_length=255, unique=True, blank=True, null=True)
+    name_en = models.CharField(max_length=255, unique=True, blank=True, null=True)
+    iata_code = models.CharField(max_length=3, db_index=True, blank=True, null=True)
+
+
+class Address(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='addresses')
+    district = models.CharField(max_length=255)
+
+
+class AddressAnalytics(models.Model):
+    user_id = models.UUIDField()
+    city_name = models.CharField()
+    country_name = models.CharField()

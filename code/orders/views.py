@@ -15,7 +15,9 @@ class OrderViewSet(ModelViewSet):
         return (drf_permissions.IsAuthenticated(),)
 
     def get_queryset(self):
-        return models.Order.objects.filter(user=self.request.user)
+        return models.Order.objects.prefetch_related(
+            'user',
+        ).filter(user=self.request.user)
 
     def get_serializer_class(self):
         if self.action == 'retrieve':

@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  ecommerce:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: daphne -b 0.0.0.0 -p 8001 ecommerce.asgi:application
+    ports:
+      - "8123:8002"
+    volumes:
+      - .:/proj
+
+  ecommerce-db:
+    hostname: ecommerce-db
+    image: postgres:14.11
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "1234:5432"
+
+  ecommerce-order-db:
+    image: postgres:14.11
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "1235:5432"
+
+  ecommerce-redis:
+    image: redis:7.0-alpine
+    ports:
+      - "5656:6379"

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python /proj/code/manage.py shell

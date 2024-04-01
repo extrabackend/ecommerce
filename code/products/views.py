@@ -1,15 +1,21 @@
-import time
+import logging
+import uuid
 
-from django.db.models import Count, F
-from rest_framework.decorators import action
+from django.conf import settings
+from django.db.models import F
 from rest_framework.viewsets import ModelViewSet
 
 from products import models, serializers
+
+logger = logging.getLogger(__name__)
 
 
 class CategoryViewSet(ModelViewSet):
 
     def get_serializer_class(self):
+        if settings.DEBUG:
+            print('request action:', self.action)
+
         if self.action in ('list', 'retrieve'):
             return serializers.RetrieveCategorySerializer
 
@@ -33,26 +39,14 @@ class ProductView(ModelViewSet):
             'subcategory__category'
         )
 
-    @action(detail=False, url_path='analytics')
-    def analytics(self, request, *args, **kwargs):
-        start = time.monotonic()
-        #...
-        qs = models.Product.objects.annotate(
-            count_order_items=Count(
-                'order_items__id'
-            )
-        )
-        #...
-        end = time.monotonic()
-        print(end - start)
-        return qs
-
 # 1. Caching +
 # 2. Session and Cookies (Middleware) +
 # 3. Localization +
-# 4. Testing
-# 5. Logging
-# 6. Async (WS and FastAPI)
-# 7. Container and Docker
-# 8. Multiple Databases, Normalization and Denormalization
-# 9. Microservices
+# 4. Testing +
+# 5. Logging +
+# 6. Timezone +
+# 7. Normalization and Denormalization +
+# 8. Async / WS
+# 9. Multiple Databases +
+# 11. Container and Docker +
+# 12. Microservices

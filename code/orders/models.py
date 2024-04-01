@@ -27,6 +27,7 @@ class Order(models.Model):
 
     class Meta:
         verbose_name_plural = _('Orders')
+        managed = False
 
 
 class OrderItem(models.Model):
@@ -49,6 +50,7 @@ class OrderItem(models.Model):
 
     class Meta:
         verbose_name_plural = 'Товары заказа'
+        managed = False
 
 # Database relations:
 # One to One = Husband and Wife
