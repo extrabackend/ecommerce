@@ -22,3 +22,4 @@ COPY . /proj
 WORKDIR /proj
 RUN chmod +x /proj/bin/*
 ENV PATH "$PATH:/proj/bin"
+ENV PYTHONPATH /proj/code

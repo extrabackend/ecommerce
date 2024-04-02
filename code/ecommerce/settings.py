@@ -84,6 +84,14 @@ TEMPLATES = [
 ]
 
 ASGI_APPLICATION = 'ecommerce.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': "channels_redis.core.RedisChannelLayer",
+        'CONFIG': {
+            'hosts': [('ecommerce-redis', 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -186,7 +194,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '%(asctime)s - %(levelnamee)s - %(message)s - %(extra)s'
+            'format': '%(asctime)s - %(levelname)s - %(message)s'
         },
         'simple': {
             'format': '{levelname} {message}',
